@@ -1,0 +1,65 @@
+class Solution {
+
+    public int lowerBound(int[] arr,int x)
+    {
+        int n= arr.length;
+        int ans = n;
+        int low = 0;
+        int high = n-1;
+        while (low <= high) {
+            int mid = (low + high) / 2;  // Find mid index
+
+            if (arr[mid] >= x) {
+                ans = mid;            // Store possible answer
+                high = mid - 1;       // Move left
+            } else {
+                low = mid + 1;        // Move right
+            }
+        }
+        return ans;
+    }
+
+
+    public int upperBound(int[] arr,int x)
+    {
+        int  n = arr.length;
+        int ans = n;
+        int low = 0;
+        int high = n-1;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+
+            if (arr[mid] > x) {
+                ans = mid;        // Store current index as potential answer
+                high = mid - 1;   // Move left
+            } else {
+                low = mid + 1;    // Move right
+            }
+        }
+        return ans;
+    }
+
+
+
+    public int[] searchRange(int[] nums, int target) {
+        int ar[]=new int[2];
+        int n = nums.length;
+        int lb = lowerBound(nums,target);
+        int ub = upperBound(nums,target);
+        if(lb==ub)
+        {
+            ar[0] = -1;
+            ar[1] = -1;
+            return ar;
+        }
+        // if(lb==n || nums[lb]!=target) 
+        // {
+        //     ar[0] = -1;
+        //     ar[1] = -1;
+        //     return ar;
+        // }
+        ar[0] = lb;
+        ar[1] = ub-1;
+        return ar;
+    }
+}
