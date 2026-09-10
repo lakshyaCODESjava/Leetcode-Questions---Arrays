@@ -1,0 +1,31 @@
+import java.util.*;
+class Solution {
+    public void rotate(int[][] matrix)
+    {
+        int n = matrix.length;
+
+        for(int x=0;x<n;x++)
+        {
+            for(int y=x+1;y<n;y++)
+            {
+                int temp = matrix[x][y];
+                matrix[x][y] = matrix[y][x];
+                matrix[y][x] = temp;
+            }
+        }
+
+        for(int i=0;i<n;i++)
+        {
+            int left = 0;
+            int right = n-1;
+            while(left<right)
+            {
+                int temp = matrix[i][left];
+                matrix[i][left] = matrix[i][right];
+                matrix[i][right] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+}
